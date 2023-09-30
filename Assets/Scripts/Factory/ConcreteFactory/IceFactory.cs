@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class IceFactory : AbstractFactory
 {
-    protected override void CreateArcher()
+    public override void CreateArcher()
     {
-        Debug.Log("CreateFireArcher");
+        Debug.Log("CreateIceArcher");
     }
 
-    protected override void CreateWarrior()
+    public override void CreateWarrior()
     {
-        Debug.Log("CreateFireWarrior");
+        Debug.Log("CreateIceWarrior");
     }
 }

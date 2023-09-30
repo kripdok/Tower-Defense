@@ -1,6 +1,8 @@
-public abstract class AbstractFactory
-{
-    protected abstract void CreateWarrior();
+using UnityEngine;
 
-    protected abstract void CreateArcher();
+public abstract class AbstractFactory:MonoBehaviour
+{
+    public abstract void CreateWarrior();
+
+    public abstract void CreateArcher();
 }

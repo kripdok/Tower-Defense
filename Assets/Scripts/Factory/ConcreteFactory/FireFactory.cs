@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class FireFactory : AbstractFactory
 {
-    protected override void CreateArcher()
+    public override void CreateArcher()
     {
         Debug.Log("CreateFireArcher");
     }
 
-    protected override void CreateWarrior()
+    public override void CreateWarrior()
     {
         Debug.Log("CreateFireWarrior");
     }
