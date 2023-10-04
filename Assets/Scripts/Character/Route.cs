@@ -8,6 +8,6 @@ public class Route : MonoBehaviour
 
     private void Start()
     {
-        _unitStateMachine._move.GetTarget(_targets);
+        _unitStateMachine._move.Enter(_targets);
     }
 }

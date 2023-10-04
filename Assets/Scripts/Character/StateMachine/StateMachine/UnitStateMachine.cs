@@ -23,13 +23,22 @@ public class UnitStateMachine : StateMachine
         {
             _idle, _move, _attack
         };
+
+        Proverca();
     }
 
 
     private void Update()
     {
+        
         Proverca();
         CorrectState.LogicUpdate();
+    }
+
+    private void FixedUpdate()
+    {
+        Debug.Log(CorrectState);
+        CorrectState.PhysicsUpdate();
     }
 
     private void Proverca()

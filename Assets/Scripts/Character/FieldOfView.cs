@@ -28,7 +28,7 @@ public class FieldOfView : MonoBehaviour
                 if (Physics.Raycast(transform.position, directionToTarget, distanceToTarget, _obstructionMask) == false)
                 {
                     _target = target;
-                    _UnitStateMachine._attack.StartAttack(_target);
+                    _UnitStateMachine._attack.Enter(_target);
                 }
             }
             else
@@ -39,7 +39,7 @@ public class FieldOfView : MonoBehaviour
         else if (_target != null)
         {
             _target = null;
-            _UnitStateMachine._attack.StartAttack(_target);
+            _UnitStateMachine._attack.Enter(_target);
         }
     }
 }

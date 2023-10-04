@@ -4,20 +4,19 @@ public class AttackState : State
 {
     private Transform _target;
 
-    public AttackState(int maxPriority = 3)
+    public AttackState(int maxPriority = 3) : base(maxPriority)
     {
-        MaxPriority = maxPriority;
-        ConcretePriority = 0;
+    }
+
+    public void Enter(Transform target)
+    {
+        _target = target;
+        Enter();
     }
 
     public override void Enter()
     {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Exit()
-    {
-        throw new System.NotImplementedException();
+        ConcretePriority = MaxPriority;
     }
 
     public override void LogicUpdate()
@@ -30,12 +29,10 @@ public class AttackState : State
         {
             ConcretePriority = 0;
         }
-            
     }
 
-    public void StartAttack(Transform target)
+    public override void PhysicsUpdate()
     {
-        _target = target;
-        ConcretePriority = MaxPriority;
+        
     }
 }
