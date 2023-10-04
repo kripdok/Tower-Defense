@@ -1,22 +1,12 @@
-using UnityEngine;
-
 public abstract class State
 {
-    private StateMachine _stateMachine;
+    protected int MaxPriority;
 
-    public State(StateMachine stateMachine)
-    {
-        _stateMachine = stateMachine;
-    }
+    public int ConcretePriority { get; protected set; }
 
     public abstract void Enter();
 
-    public abstract void Update();
+    public abstract void LogicUpdate();
 
     public abstract void Exit();
-
-    private void ChangeState(State state)
-    {
-        _stateMachine.ChangeState(state);
-    }
 }

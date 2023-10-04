@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class Route : MonoBehaviour
 {
-    [SerializeField] private MoveState _moveState;
+    [SerializeField] private UnitStateMachine _unitStateMachine;
     [SerializeField] private List<Transform> _targets;
 
     private void Start()
     {
-        _moveState.GetTarget(_targets);
+        _unitStateMachine._move.GetTarget(_targets);
     }
 }

@@ -3,6 +3,7 @@ using UnityEngine.Events;
 
 public class FieldOfView : MonoBehaviour
 {
+    [SerializeField] private UnitStateMachine _UnitStateMachine;
     [SerializeField] private float _radius;
     [Range(0, 360)]
     [SerializeField] private int _angleOfView;
@@ -10,8 +11,6 @@ public class FieldOfView : MonoBehaviour
     [SerializeField] private LayerMask _obstructionMask;
 
     private Transform _target;
-
-    public event UnityAction<Transform> TargetHasBeenSighted;
 
     private void Update()
     {
@@ -29,6 +28,7 @@ public class FieldOfView : MonoBehaviour
                 if (Physics.Raycast(transform.position, directionToTarget, distanceToTarget, _obstructionMask) == false)
                 {
                     _target = target;
+                    _UnitStateMachine._attack.StartAttack(_target);
                 }
             }
             else
@@ -39,8 +39,7 @@ public class FieldOfView : MonoBehaviour
         else if (_target != null)
         {
             _target = null;
+            _UnitStateMachine._attack.StartAttack(_target);
         }
-
-        TargetHasBeenSighted?.Invoke(_target);
     }
 }
