@@ -2,20 +2,19 @@ using UnityEngine;
 
 public class AttackState : State
 {
+    private AttackSystem _attackSystem;
+    private RotateSystem _rotateSystem;
     private Transform _target;
 
-    public AttackState(int maxPriority = 3) : base(maxPriority)
+    public AttackState(RotateSystem rotateSystem,AttackSystem attackSystem,int maxPriority = 3) : base(maxPriority)
     {
+        _rotateSystem = rotateSystem;
+        _attackSystem = attackSystem;
     }
 
-    public void Enter(Transform target)
+    public void SetTarget(Transform target)
     {
         _target = target;
-        Enter();
-    }
-
-    public override void Enter()
-    {
         ConcretePriority = MaxPriority;
     }
 
@@ -23,7 +22,7 @@ public class AttackState : State
     {
         if (_target != null)
         {
-            Debug.Log("Я атакую " + _target);
+            _rotateSystem.Rotation(_target);
         }
         else
         {
@@ -31,8 +30,16 @@ public class AttackState : State
         }
     }
 
-    public override void PhysicsUpdate()
+    public override void PhysicsUpdate(){}
+
+    public override void Enter()
     {
         
+        _attackSystem.PrepareToStrike(_target);
+    }
+
+    public override void Exit()
+    {
+        _attackSystem.TryFinishAttack();
     }
 }

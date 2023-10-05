@@ -9,14 +9,12 @@ public class IdleState : State
 
     public override void LogicUpdate()
     {
+        Debug.Log("I state");
     }
 
-    public override void PhysicsUpdate()
-    {
-    }
+    public override void PhysicsUpdate(){}
 
-    public override void Enter()
-    {
+    public override void Enter(){}
 
-    }
+    public override void Exit(){}
 }

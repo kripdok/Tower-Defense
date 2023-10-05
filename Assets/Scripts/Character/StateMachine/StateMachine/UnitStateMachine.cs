@@ -1,58 +1,56 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class UnitStateMachine : StateMachine
 {
+    [SerializeField] private float _speed;
+    [SerializeField] private AttackSystem _attackSystem;
+
     private IdleState _idle;
-    public MoveState _move { get; private set; }
-    public AttackState _attack { get; private set; }
-
     private MoveSystem _moveSystem;
-
+    private RotateSystem _rotateSystem;
     private List<State> _states;
 
+    public MoveState MoveState { get; private set; }
+    public AttackState AttackState { get; private set; }
 
     private void Awake()
     {
         _idle = new IdleState();
-        _moveSystem = new MoveSystem(transform,2,GetComponent<Rigidbody>());
-        _move = new MoveState(_moveSystem);
-        _attack = new AttackState();
+        _moveSystem = new MoveSystem(transform, _speed, GetComponent<Rigidbody>());
+        _rotateSystem = new RotateSystem(transform);
+        MoveState = new MoveState(_moveSystem, _rotateSystem);
+        AttackState = new AttackState(_rotateSystem,_attackSystem);
+
         _states = new List<State>()
         {
-            _idle, _move, _attack
+            _idle, MoveState, AttackState
         };
 
-        Proverca();
+        SetStateWithTheMaxPriority();
     }
-
 
     private void Update()
     {
-        
-        Proverca();
         CorrectState.LogicUpdate();
+        SetStateWithTheMaxPriority();
     }
 
     private void FixedUpdate()
     {
-        Debug.Log(CorrectState);
         CorrectState.PhysicsUpdate();
     }
 
-    private void Proverca()
+    private void SetStateWithTheMaxPriority()
     {
-        int x = 0;
-
-        foreach (var state in _states)
+        if(CorrectState != null)
         {
-            if (x <= state.ConcretePriority)
-            {
-                
-                x = state.ConcretePriority;
-                CorrectState = state;
-            }
+            CorrectState.Exit();
         }
+
+        CorrectState = _states.OrderByDescending(state => state.ConcretePriority).FirstOrDefault();
+        CorrectState.Enter();
     }
 }

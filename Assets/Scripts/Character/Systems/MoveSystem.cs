@@ -16,37 +16,28 @@ public class MoveSystem
         IsReachedTarget = false;
     }
 
-
     public void Move(Transform target)
     {
         if (target != null)
         {
             IsReachedTarget = false;
             Vector3 direction = (target.position - _transform.position).normalized;
-            _transform.LookAt(target.position);
             _rigidbody.velocity = direction * _speed;
-            Rotation(target);
-
-            if (Vector3.Distance(target.position, _transform.position) < 0.1)
-            {
-                _rigidbody.velocity = Vector3.zero;
-                target = null;
-                IsReachedTarget = true;
-            }
+            TryToStap(target);
         }
     }
 
-    private void Rotation(Transform target)
+    public void Stop()
     {
-        Vector3 direction = target.position - _transform.position;
-        Vector3 directionXY = new Vector3(direction.x, 0, direction.z);
-        float angle = Vector3.SignedAngle(Vector3.forward, directionXY, Vector3.up);
+        _rigidbody.velocity = Vector3.zero;
+    }
 
-        if (angle < 0)
+    private void TryToStap(Transform target)
+    {
+        if (Vector3.Distance(target.position, _transform.position) < 0.1)
         {
-            angle += 360;
+            Stop();
+            IsReachedTarget = true;
         }
-
-        _transform.rotation = Quaternion.Euler(0, angle, 0);
     }
 }
