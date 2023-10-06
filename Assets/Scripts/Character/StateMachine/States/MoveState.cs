@@ -14,6 +14,7 @@ public class MoveState : State
         _rotateSystem = rotateSystem;
         _index = 0;
     }
+    public override void Enter(){}
 
     public override void LogicUpdate(){}
 
@@ -27,14 +28,17 @@ public class MoveState : State
             IncreaseIndex();
         }
     }
+    public override void Exit()
+    {
+        _moveSystem.Stop();
+    }
 
     public void SetRoute(List<Transform> targets)
     {
         _targets = targets;
         ConcretePriority = MaxPriority;
+        Invoke();
     }
-
-    public override void Enter(){}
 
     private void IncreaseIndex()
     {
@@ -43,11 +47,7 @@ public class MoveState : State
         if (_index >= _targets.Count)
         {
             ConcretePriority = 0;
+            Invoke();
         }
-    }
-
-    public override void Exit()
-    {
-        _moveSystem.Stop();
     }
 }

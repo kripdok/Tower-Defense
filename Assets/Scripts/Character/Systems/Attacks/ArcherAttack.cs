@@ -1,14 +1,13 @@
 using System.Collections;
-using UnityEngine;
 
 public class ArcherAttack : AttackSystem
 {
-    protected override IEnumerator Attack(Transform target)
+    protected override IEnumerator Attack(HealthSystem targetHealth)
     {
-        while(target != null)
+        while (targetHealth.CorrectHealth > 0)
         {
-            Debug.Log("я стрел€ю из лука");
-            yield return target;
+            targetHealth.CauseDamage(_damage);
+            yield return _time;
         }
     }
 }

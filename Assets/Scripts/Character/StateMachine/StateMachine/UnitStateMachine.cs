@@ -32,10 +32,19 @@ public class UnitStateMachine : StateMachine
         SetStateWithTheMaxPriority();
     }
 
+    public void OnEnable()
+    {
+        State.OnPriorityChange += SetStateWithTheMaxPriority;
+    }
+
+    public void OnDisable()
+    {
+        State.OnPriorityChange -= SetStateWithTheMaxPriority;
+    }
+
     private void Update()
     {
         CorrectState.LogicUpdate();
-        SetStateWithTheMaxPriority();
     }
 
     private void FixedUpdate()
@@ -45,12 +54,15 @@ public class UnitStateMachine : StateMachine
 
     private void SetStateWithTheMaxPriority()
     {
-        if(CorrectState != null)
-        {
-            CorrectState.Exit();
-        }
+        State state = _states.OrderByDescending(state => state.ConcretePriority).FirstOrDefault();
 
-        CorrectState = _states.OrderByDescending(state => state.ConcretePriority).FirstOrDefault();
-        CorrectState.Enter();
+        if (CorrectState != null)
+        {
+            ChangeState(state);
+        }
+        else
+        {
+            Initialize(state);
+        }
     }
 }

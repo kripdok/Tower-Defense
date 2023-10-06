@@ -17,25 +17,34 @@ public class FieldOfView : MonoBehaviour
         FindingTheTarget();
     }
 
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, _radius);
+    }
+
     private void FindingTheTarget()
     {
         Collider[] rangeChecks = Physics.OverlapSphere(transform.position, _radius, _targetMask);
 
-        if (rangeChecks.Length != 0)
+        if (_target == null)
         {
-            Transform target = rangeChecks[0].transform;
-            Vector3 directionToTarget = (target.position - transform.position).normalized;
+            if (rangeChecks.Length != 0)
+            {
+                Transform target = rangeChecks[0].transform;
+                Vector3 directionToTarget = (target.position - transform.position).normalized;
 
-            TryToSeeTargetFromAnAngleOfView(directionToTarget, target);
+                TryToSeeTargetFromAnAngleOfView(directionToTarget, target);
+            }
         }
-        else if (_target != null)
+        else if (_target.gameObject.activeSelf == false)
         {
             _target = null;
-            _UnitStateMachine.AttackState.SetTarget(_target);
+            _UnitStateMachine.AttackState.ClearTarget();
         }
     }
 
-    private void TryToSeeTargetFromAnAngleOfView(Vector3 directionToTarget, Transform target )
+    private void TryToSeeTargetFromAnAngleOfView(Vector3 directionToTarget, Transform target)
     {
         if (Vector3.Angle(transform.forward, directionToTarget) < _angleOfView / NumberOfFieldOfViewBoundaries)
         {

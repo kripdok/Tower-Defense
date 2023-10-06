@@ -5,6 +5,7 @@ public abstract class AttackSystem :MonoBehaviour
 {
     [SerializeField] private HashUnitAnimation _animation;
     [SerializeField] private float _delayBetweenAttack;
+    [SerializeField] protected int _damage;
 
     protected WaitForSeconds _time;
     private Coroutine _coroutine;
@@ -14,10 +15,10 @@ public abstract class AttackSystem :MonoBehaviour
         _time = new WaitForSeconds(_delayBetweenAttack);
     }
 
-    public void PrepareToStrike(Transform target)
+    public void PrepareToStrike(HealthSystem targetHealth)
     {
         TryFinishAttack();
-        _coroutine = StartCoroutine(Attack(target));
+        _coroutine = StartCoroutine(Attack(targetHealth));
     }
 
     public void TryFinishAttack()
@@ -28,5 +29,5 @@ public abstract class AttackSystem :MonoBehaviour
         }
     }
 
-    protected abstract IEnumerator Attack(Transform target);
+    protected abstract IEnumerator Attack(HealthSystem targetHealth);
 }

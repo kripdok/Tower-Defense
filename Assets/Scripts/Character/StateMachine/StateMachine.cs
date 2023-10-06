@@ -6,7 +6,7 @@ public class StateMachine : MonoBehaviour
 
     public void ChangeState(State nextState)
     {
-        CorrectState.Enter();
+        CorrectState.Exit();
         SetCorrectState(nextState);
     }
 

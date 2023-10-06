@@ -5,6 +5,7 @@ public class AttackState : State
     private AttackSystem _attackSystem;
     private RotateSystem _rotateSystem;
     private Transform _target;
+    private HealthSystem _targetHealth;
 
     public AttackState(RotateSystem rotateSystem,AttackSystem attackSystem,int maxPriority = 3) : base(maxPriority)
     {
@@ -12,10 +13,9 @@ public class AttackState : State
         _attackSystem = attackSystem;
     }
 
-    public void SetTarget(Transform target)
+    public override void Enter()
     {
-        _target = target;
-        ConcretePriority = MaxPriority;
+        _attackSystem.PrepareToStrike(_targetHealth);
     }
 
     public override void LogicUpdate()
@@ -27,19 +27,26 @@ public class AttackState : State
         else
         {
             ConcretePriority = 0;
+            Invoke();
         }
     }
 
     public override void PhysicsUpdate(){}
 
-    public override void Enter()
-    {
-        
-        _attackSystem.PrepareToStrike(_target);
-    }
-
     public override void Exit()
     {
         _attackSystem.TryFinishAttack();
+    }
+    public void SetTarget(Transform target)
+    {
+        _target = target;
+        _target.TryGetComponent<HealthSystem>(out _targetHealth);
+        ConcretePriority = MaxPriority;
+        Invoke();
+    }
+
+    public void ClearTarget()
+    {
+        _target = null;
     }
 }
