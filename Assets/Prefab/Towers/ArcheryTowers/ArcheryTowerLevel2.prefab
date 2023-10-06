@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5033738085869375854}
   - component: {fileID: 8830199648201195729}
   - component: {fileID: 3529380134843241944}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 8741359209037950588}
   - component: {fileID: 3922011161260514541}
   - component: {fileID: 2096808927926872397}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 6888301071672195928}
   - component: {fileID: 6545457625204969601}
   - component: {fileID: 9005676478302638006}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 6925704935115568639}
   - component: {fileID: 5809866887488500071}
   - component: {fileID: 8217601049829653738}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 9005867384279726333}
   - component: {fileID: 5851159682345339196}
   - component: {fileID: 5814381599615769785}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -426,7 +426,7 @@ GameObject:
   - component: {fileID: 3011749812977949700}
   - component: {fileID: 6140531788842437846}
   - component: {fileID: 3700927611838544414}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -509,7 +509,7 @@ GameObject:
   - component: {fileID: 2544675964458168144}
   - component: {fileID: 8939453085786226348}
   - component: {fileID: 5205438977569767575}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -591,7 +591,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6388753471839313221}
   - component: {fileID: 3214431088239762682}
-  m_Layer: 0
+  - component: {fileID: -1036137112535356549}
+  m_Layer: 6
   m_Name: ArcheryTowerLevel2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -633,3 +634,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.6, y: 1, z: 0.6}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-1036137112535356549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8768476512536665283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5000379392611af43ac9e3a4c6f5c913, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: {fileID: 0}
