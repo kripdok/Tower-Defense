@@ -3,6 +3,7 @@ using UnityEngine.Events;
 
 public class Tower : MonoBehaviour
 {
+    [SerializeField] private StateMachine _stateMachine;
     [SerializeField] private HealthSystem _health;
    
     public event UnityAction Died;
@@ -19,6 +20,7 @@ public class Tower : MonoBehaviour
 
     private void BecomingInactive()
     {
+        //_stateMachine.ExitAllStates();
         Died?.Invoke();
     }
 }

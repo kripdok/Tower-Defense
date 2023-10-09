@@ -4,14 +4,12 @@ using UnityEngine;
 public class MoveState : State
 {
     private MoveSystem _moveSystem;
-    private RotateSystem _rotateSystem;
     private List<Transform> _targets;
     private int _index;
 
-    public MoveState(MoveSystem moveSystem,RotateSystem rotateSystem, int maxPriority = 2) : base(maxPriority)
+    public MoveState(MoveSystem moveSystem, StateMachine stateMachine, int maxPriority = 2) : base(maxPriority,stateMachine)
     {
         _moveSystem = moveSystem;
-        _rotateSystem = rotateSystem;
         _index = 0;
     }
     public override void Enter(){}
@@ -21,7 +19,6 @@ public class MoveState : State
     public override void PhysicsUpdate()
     {
         _moveSystem.Move(_targets[_index]);
-        _rotateSystem.Rotation(_targets[_index]);
 
         if (_moveSystem.IsReachedTarget)
         {
@@ -30,6 +27,7 @@ public class MoveState : State
     }
     public override void Exit()
     {
+        _index = 0;
         _moveSystem.Stop();
     }
 
@@ -37,7 +35,7 @@ public class MoveState : State
     {
         _targets = targets;
         ConcretePriority = MaxPriority;
-        Invoke();
+        StateMachine.SetStateWithTheMaxPriority();
     }
 
     private void IncreaseIndex()
@@ -47,7 +45,7 @@ public class MoveState : State
         if (_index >= _targets.Count)
         {
             ConcretePriority = 0;
-            Invoke();
+            StateMachine.SetStateWithTheMaxPriority();
         }
     }
 }

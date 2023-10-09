@@ -1,6 +1,6 @@
 using System.Collections;
 
-public class ArcherAttack : AttackSystem
+public class TowerAttackSystem : AttackSystem
 {
     protected override IEnumerator Attack(HealthSystem targetHealth)
     {

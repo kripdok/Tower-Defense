@@ -1,14 +1,16 @@
+using Unity.VisualScripting;
 using UnityEngine.Events;
 
 public abstract class State
 {
     protected int MaxPriority;
+    protected StateMachine StateMachine;
     public int ConcretePriority { get; protected set; }
 
-    public static event UnityAction OnPriorityChange;
-    public State(int maxPriority)
+    public State(int maxPriority, StateMachine stateMachine)
     {
         MaxPriority = maxPriority;
+        StateMachine = stateMachine;
         ConcretePriority = 0;
     }
 
@@ -20,8 +22,4 @@ public abstract class State
 
     public abstract void Exit();
 
-    protected void Invoke()
-    {
-        OnPriorityChange?.Invoke();
-    }
 }

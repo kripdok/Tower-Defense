@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public abstract class AttackSystem :MonoBehaviour
+public abstract class AttackSystem : MonoBehaviour
 {
     [SerializeField] private HashUnitAnimation _animation;
     [SerializeField] private float _delayBetweenAttack;

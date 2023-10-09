@@ -1,10 +1,46 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
+    protected List<State> States;
+
     public State CorrectState { get; protected set; }
 
-    public void ChangeState(State nextState)
+    private void Update()
+    {
+        CorrectState.LogicUpdate();
+    }
+
+    private void FixedUpdate()
+    {
+        CorrectState.PhysicsUpdate();
+    }
+
+    public void ExitAllStates()
+    {
+        foreach (var state in States)
+        {
+            state.Exit();
+        }
+    }
+
+    public void SetStateWithTheMaxPriority()
+    {
+        State state = States.OrderByDescending(state => state.ConcretePriority).FirstOrDefault();
+
+        if (CorrectState != null)
+        {
+            ChangeState(state);
+        }
+        else
+        {
+            Initialize(state);
+        }
+    }
+
+    protected void ChangeState(State nextState)
     {
         CorrectState.Exit();
         SetCorrectState(nextState);

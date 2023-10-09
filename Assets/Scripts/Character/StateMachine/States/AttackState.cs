@@ -3,13 +3,11 @@ using UnityEngine;
 public class AttackState : State
 {
     private AttackSystem _attackSystem;
-    private RotateSystem _rotateSystem;
     private Transform _target;
     private HealthSystem _targetHealth;
 
-    public AttackState(RotateSystem rotateSystem,AttackSystem attackSystem,int maxPriority = 3) : base(maxPriority)
+    public AttackState(AttackSystem attackSystem,StateMachine stateMachine,int maxPriority = 3) : base(maxPriority, stateMachine)
     {
-        _rotateSystem = rotateSystem;
         _attackSystem = attackSystem;
     }
 
@@ -20,14 +18,10 @@ public class AttackState : State
 
     public override void LogicUpdate()
     {
-        if (_target != null)
-        {
-            _rotateSystem.Rotation(_target);
-        }
-        else
+        if(_target == null)
         {
             ConcretePriority = 0;
-            Invoke();
+            StateMachine.SetStateWithTheMaxPriority();
         }
     }
 
@@ -35,14 +29,16 @@ public class AttackState : State
 
     public override void Exit()
     {
+        _target = null;
         _attackSystem.TryFinishAttack();
     }
+
     public void SetTarget(Transform target)
     {
         _target = target;
         _target.TryGetComponent<HealthSystem>(out _targetHealth);
         ConcretePriority = MaxPriority;
-        Invoke();
+        StateMachine.SetStateWithTheMaxPriority();
     }
 
     public void ClearTarget()

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class IdleState : State
 {
-    public IdleState(int maxPriority = 1): base(maxPriority)
+    public IdleState(StateMachine stateMachine, int maxPriority = 1): base(maxPriority,stateMachine)
     {
         ConcretePriority = maxPriority;
     }

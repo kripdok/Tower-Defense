@@ -1,25 +1,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class UnitStateMachine : StateMachine
+public class TowerStateMachine : StateMachine
 {
-    [SerializeField] private Unit _unit;
+    [SerializeField] private AttackSystem _attackSystem;
 
+    private RotateSystem _rotateSystem;
     private IdleState _idleState;
-
-    public MoveState MoveState { get; private set; }
     public AttackState AttackState { get; private set; }
 
     private void Awake()
     {
         _idleState = new IdleState(this);
-        MoveState = new MoveState(_unit.MoveSystem, this);
-        AttackState = new AttackState(_unit.AttackSystem, this);
+        _rotateSystem = new RotateSystem(transform);
+        AttackState = new AttackState(_attackSystem, this);
 
         States = new List<State>()
         {
-            _idleState, MoveState, AttackState
+            _idleState, AttackState
         };
 
         SetStateWithTheMaxPriority();
