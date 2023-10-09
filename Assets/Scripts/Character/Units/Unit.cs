@@ -6,6 +6,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(UnitStateMachine))]
 public class Unit : MonoBehaviour
 {
+    [SerializeField] private int _points;
     [SerializeField] private AttackSystem _attackSystem;
     [SerializeField] private float _speed;
 
@@ -18,6 +19,7 @@ public class Unit : MonoBehaviour
 
     public AttackSystem AttackSystem => _attackSystem;
 
+    public static event UnityAction<int> PassPoints;
     public event UnityAction Died;
 
     private void Awake()
@@ -41,6 +43,7 @@ public class Unit : MonoBehaviour
 
     private void BecomingInactive()
     {
+        PassPoints?.Invoke(_points);
         gameObject.SetActive(false);
         _unitStateMachine.ExitAllStates();
         _healthSystem.AddMaxHealth();

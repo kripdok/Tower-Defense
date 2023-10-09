@@ -27,13 +27,13 @@ public class MoveState : State
     }
     public override void Exit()
     {
-        _index = 0;
         _moveSystem.Stop();
     }
 
     public void SetRoute(List<Transform> targets)
     {
         _targets = targets;
+        _index = 0;
         ConcretePriority = MaxPriority;
         StateMachine.SetStateWithTheMaxPriority();
     }

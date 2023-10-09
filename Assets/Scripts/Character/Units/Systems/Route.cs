@@ -14,7 +14,6 @@ public class Route
     public void Init(List<Transform> route)
     {
         _targets = route;
-        Debug.Log(_unitStateMachine.MoveState);
         _unitStateMachine.MoveState.SetRoute(_targets);
     }
 }

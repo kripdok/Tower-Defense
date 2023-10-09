@@ -20,7 +20,7 @@ public class Tower : MonoBehaviour
 
     private void BecomingInactive()
     {
-        //_stateMachine.ExitAllStates();
+        _stateMachine.ExitAllStates();
         Died?.Invoke();
     }
 }

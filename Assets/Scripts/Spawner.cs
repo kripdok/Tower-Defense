@@ -23,7 +23,6 @@ public class Spawner : MonoBehaviour
         {
             var unit = _pool.GetPrefab();
             unit.transform.position = transform.position;
-            Debug.Log(unit);
             unit.Route.Init(_route);
             yield return _time;
         }
