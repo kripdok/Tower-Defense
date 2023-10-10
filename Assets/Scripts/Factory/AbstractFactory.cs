@@ -1,8 +1,6 @@
 using UnityEngine;
 
-public abstract class AbstractFactory:MonoBehaviour
+public abstract class AbstractFactory<T>:MonoBehaviour where T : MonoBehaviour
 {
-    public abstract void CreateWarrior();
-
-    public abstract void CreateArcher();
+    public abstract T Create(T prefab);
 }

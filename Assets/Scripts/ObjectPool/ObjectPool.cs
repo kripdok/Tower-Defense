@@ -4,21 +4,20 @@ using UnityEngine;
 
 public abstract class ObjectPool<T> : MonoBehaviour where T : MonoBehaviour
 {
-    [SerializeField] private T _prefab;
-    private List<T> _objects;
+    protected List<T> Objects;
 
     private void Start()
     {
-        _objects = new List<T>();
+        Objects = new List<T>();
     }
 
-    public T GetPrefab()
+    public T GetPrefab(T prefab)
     {
-        var obj = _objects.FirstOrDefault(obj => obj.isActiveAndEnabled ==false);
+        var obj = Objects.FirstOrDefault(obj => obj.isActiveAndEnabled == false && obj == prefab) ;
 
         if(obj == null)
         {
-            obj = CreatePrefab();
+            obj = CreatePrefab(prefab);
         }
 
         obj.gameObject.SetActive(true);
@@ -30,10 +29,10 @@ public abstract class ObjectPool<T> : MonoBehaviour where T : MonoBehaviour
         obj.gameObject.SetActive(false);
     }
 
-    protected virtual T CreatePrefab()
+    protected virtual T CreatePrefab(T prefab)
     {
-        var obj = Instantiate(_prefab,transform);
-        _objects.Add(obj);
+        var obj = Instantiate(prefab, transform);
+        Objects.Add(obj);
         return obj;
     }
 }

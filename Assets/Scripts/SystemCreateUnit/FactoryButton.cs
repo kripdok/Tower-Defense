@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class FactoryButton : MonoBehaviour
 {
-    [SerializeField] private AbstractFactory _factory;
     [SerializeField] private Button _button;
 
     private Unit _unit;
@@ -30,15 +29,5 @@ public class FactoryButton : MonoBehaviour
 
     private void CreateUnit()
     {
-        switch (_unit)
-        {
-            case Warrior:
-                _factory.CreateWarrior();
-                break;
-            case Archer:
-                _factory.CreateArcher();
-                break;
-
-        }
     }
 }

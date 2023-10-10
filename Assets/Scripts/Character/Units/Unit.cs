@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,12 +11,13 @@ public class Unit : MonoBehaviour
     [SerializeField] private AttackSystem _attackSystem;
     [SerializeField] private float _speed;
 
+    private UnitPool _pool;
+    private Route _route;
     private UnitStateMachine _unitStateMachine;
     private HealthSystem _healthSystem;
 
     public MoveSystem MoveSystem { get; private set; }
     public RotateSystem RotateSystem { get; private set; }
-    public Route Route { get; private set; }
 
     public AttackSystem AttackSystem => _attackSystem;
 
@@ -26,7 +28,7 @@ public class Unit : MonoBehaviour
     {
         _healthSystem= GetComponent<HealthSystem>();
         _unitStateMachine = GetComponent<UnitStateMachine>();
-        Route = new Route(_unitStateMachine);
+        _route = new Route(_unitStateMachine);
         RotateSystem = new RotateSystem(transform);
         MoveSystem = new MoveSystem(transform, _speed, GetComponent<Rigidbody>(), RotateSystem);
     }
@@ -44,9 +46,14 @@ public class Unit : MonoBehaviour
     private void BecomingInactive()
     {
         PassPoints?.Invoke(_points);
-        gameObject.SetActive(false);
+        _pool.Release(this);
         _unitStateMachine.ExitAllStates();
-        _healthSystem.AddMaxHealth();
         Died?.Invoke();
+    }
+
+    public void Init(UnitPool pool, List<Transform> route)
+    {
+        _route.Init(route);
+        _pool = pool;
     }
 }

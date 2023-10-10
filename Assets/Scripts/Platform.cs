@@ -1,9 +1,9 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Renderer))]
 public class Platform : MonoBehaviour
 {
-    [SerializeField] private ObjectPool<Tower> _pool;
     [SerializeField] private Color _hoverColor;
     [SerializeField] private Vector3 _positionOffset;
 
@@ -11,6 +11,7 @@ public class Platform : MonoBehaviour
     private Renderer _renderer;
     private Color _defoltColor;
 
+    public static event UnityAction<Platform> OnPlatformReady;
     private void Start()
     {
         _renderer = GetComponent<Renderer>();
@@ -32,11 +33,9 @@ public class Platform : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(_tower == null)
+        if (_tower == null)
         {
-            _tower = _pool.GetPrefab();
-            _tower.transform.position = transform.position + _positionOffset;
-            _tower.Died += DeleteTower;
+            OnPlatformReady?.Invoke(this);
         }
     }
 
@@ -45,11 +44,17 @@ public class Platform : MonoBehaviour
         _renderer.material.color = _defoltColor;
     }
 
+    public void SetTower(Tower Tower)
+    {
+        _tower = Tower;
+        _tower.transform.position = transform.position + _positionOffset;
+        _tower.Died += DeleteTower;
+    }
+
 
     private void DeleteTower()
     {
         _tower.Died -= DeleteTower;
-        _pool.Release(_tower);
         _tower = null;
     }
 }

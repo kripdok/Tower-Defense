@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 1630570115857125975}
   - component: {fileID: 6629189418747850711}
   - component: {fileID: 7473357517445796990}
-  - component: {fileID: 2218500402281754081}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,20 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &2218500402281754081
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1228379369903114060}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1489291542481317992
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,7 +131,7 @@ GameObject:
   - component: {fileID: 9071968780391303777}
   - component: {fileID: 7964482512830453287}
   - component: {fileID: 3118923330389181200}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -312,7 +297,7 @@ GameObject:
   - component: {fileID: 1781137779241616572}
   - component: {fileID: 8096868387102213330}
   - component: {fileID: 3716651782881433300}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -396,7 +381,7 @@ GameObject:
   - component: {fileID: 3877860141999554515}
   - component: {fileID: 1449692896358318866}
   - component: {fileID: 2989836956404226209}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -576,7 +561,14 @@ GameObject:
   - component: {fileID: 927242837493472707}
   - component: {fileID: 2713331220618037848}
   - component: {fileID: 3049711041939398728}
-  m_Layer: 0
+  - component: {fileID: 5527407861891851496}
+  - component: {fileID: 5385840053336459890}
+  - component: {fileID: 24294874574124541}
+  - component: {fileID: 2508992492411238652}
+  - component: {fileID: 9051916623867372559}
+  - component: {fileID: 6164469248457319834}
+  - component: {fileID: 2860336737165530561}
+  m_Layer: 7
   m_Name: Warrior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -592,7 +584,7 @@ Transform:
   m_GameObject: {fileID: 6749289106644359796}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1630570115857125975}
@@ -634,8 +626,112 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!136 &5527407861891851496
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6749289106644359796}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5385840053336459890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6749289106644359796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e217d603e5de4648b9c62c602661cc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _points: 10
+  _attackSystem: {fileID: 9051916623867372559}
+  _speed: 0.5
+--- !u!114 &24294874574124541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6749289106644359796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ed56a6fcd47a7046a84a006d8817391, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unit: {fileID: 5385840053336459890}
+--- !u!114 &2508992492411238652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6749289106644359796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cea92f7016ec3fa4db25f314a5871dfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _radius: 1.5
+  _angleOfView: 360
+  _targetMask:
+    serializedVersion: 2
+    m_Bits: 64
+  _obstructionMask:
+    serializedVersion: 2
+    m_Bits: 183
+  _unit: {fileID: 5385840053336459890}
+  _UnitStateMachine: {fileID: 24294874574124541}
+--- !u!114 &9051916623867372559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6749289106644359796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01eb197ce0b2ee2459abc08535b04af6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animation: {fileID: 2860336737165530561}
+  _delayBetweenAttack: 5
+  _damage: 2
+--- !u!114 &6164469248457319834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6749289106644359796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c93381952994a146af67632ff3f3441, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 7
+--- !u!114 &2860336737165530561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6749289106644359796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba0ba7ebc9c53cf49abfd506b6a8e40c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6812961370929358616
 GameObject:
   m_ObjectHideFlags: 0
@@ -730,7 +826,7 @@ GameObject:
   - component: {fileID: 8236264329313650446}
   - component: {fileID: 5547161190860581262}
   - component: {fileID: 3196471263439950395}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -814,7 +910,7 @@ GameObject:
   - component: {fileID: 8352111774687950389}
   - component: {fileID: 410985913802817702}
   - component: {fileID: 5932166088794937061}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
