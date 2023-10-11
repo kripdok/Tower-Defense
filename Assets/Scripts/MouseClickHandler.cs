@@ -3,6 +3,8 @@ using UnityEngine;
 public class MouseClickHandler : MonoBehaviour
 {
     [SerializeField] private LayerMask clickLayerMask;
+    [SerializeField] private Builder _builder;
+    [SerializeField] private TowerMenu _menu;
 
     private InputActionControls _input;
 
@@ -35,6 +37,18 @@ public class MouseClickHandler : MonoBehaviour
 
     private void HandleClick(GameObject clickedObject)
     {
-        Debug.Log("Clicked on: " + clickedObject.name);
+        if (clickedObject.TryGetComponent<Platform>(out Platform platform))
+        {
+            _builder.TryBuildTowerOnPlatform(platform);
+            _menu.CloseMenu();
+        }  
+        else if(clickedObject.TryGetComponent<Tower>(out Tower tower))
+        {
+            _menu.SetTower(tower);
+        }
+        else
+        {
+            _menu.CloseMenu();
+        }
     }
 }

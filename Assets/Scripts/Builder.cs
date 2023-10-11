@@ -3,23 +3,13 @@ using UnityEngine.Events;
 
 public class Builder : MonoBehaviour
 {
-    [SerializeField] private Tower _tower;
     [SerializeField] private TowerPool _pool;
 
+    private Tower _tower;
 
     public event UnityAction TowerIsBuilt;
 
-    private void OnEnable()
-    {
-        Platform.OnPlatformReady += TryBuildTowerOnPlatform;
-    }
-
-    private void OnDisable()
-    {
-        Platform.OnPlatformReady -= TryBuildTowerOnPlatform;
-    }
-
-    private void TryBuildTowerOnPlatform(Platform platform)
+    public void TryBuildTowerOnPlatform(Platform platform)
     {
         if (_tower != null)
         {

@@ -323,9 +323,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Ice Tower
   _price: 250
+  _upgradePrice: 150
   _icon: {fileID: 21300000, guid: d6c8d9ee15880b14098cd9f5a4c93cba, type: 3}
-  _stateMachine: {fileID: -1237341696060466210}
-  _health: {fileID: 1137747097795914001}
 --- !u!114 &-1237341696060466210
 MonoBehaviour:
   m_ObjectHideFlags: 0

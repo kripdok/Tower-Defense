@@ -11,7 +11,6 @@ public class Platform : MonoBehaviour
     private Renderer _renderer;
     private Color _defoltColor;
 
-    public static event UnityAction<Platform> OnPlatformReady;
     private void Start()
     {
         _renderer = GetComponent<Renderer>();
@@ -29,14 +28,6 @@ public class Platform : MonoBehaviour
     private void OnMouseEnter()
     {
         _renderer.material.color = _hoverColor;
-    }
-
-    private void OnMouseDown()
-    {
-        if (_tower == null)
-        {
-            OnPlatformReady?.Invoke(this);
-        }
     }
 
     private void OnMouseExit() 

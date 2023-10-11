@@ -5,6 +5,7 @@ public class PointCounter : MonoBehaviour
 {
     [SerializeField] private PointCounterUI _pointCounterUI;
     [SerializeField] private Shop _shop;
+    [SerializeField] private TowerMenu _towerMenu;
 
     private int _correctPoint;
 
@@ -21,14 +22,20 @@ public class PointCounter : MonoBehaviour
     private void OnEnable()
     {
         Unit.PassPoints += AddPoints;
+        _shop.Bought += ReducePoints;
+        _towerMenu.Sold += AddPoints;
+        _towerMenu.Upgraded += ReducePoints;
     }
 
     private void OnDisable()
     {
         Unit.PassPoints -= AddPoints;
+        _shop.Bought -= ReducePoints;
+        _towerMenu.Sold -= AddPoints;
+        _towerMenu.Upgraded -= ReducePoints;
     }
 
-    public void ReducePoints(int points)
+    private void ReducePoints(int points)
     {
         _correctPoint -= points;
         TransmitChangeData();
