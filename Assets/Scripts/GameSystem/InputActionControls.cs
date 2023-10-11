@@ -136,6 +136,34 @@ public partial class @InputActionControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Cursor"",
+            ""id"": ""21d3d0a0-3740-4f33-8446-35c8155742a1"",
+            ""actions"": [
+                {
+                    ""name"": ""Pressing"",
+                    ""type"": ""Value"",
+                    ""id"": ""154107af-c94c-4ea2-bd0d-850deedf6ae8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""da021b90-308b-4a4d-9844-b87386ee1283"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pressing"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -144,6 +172,9 @@ public partial class @InputActionControls: IInputActionCollection2, IDisposable
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_Move = m_Camera.FindAction("Move", throwIfNotFound: true);
         m_Camera_Zoom = m_Camera.FindAction("Zoom", throwIfNotFound: true);
+        // Cursor
+        m_Cursor = asset.FindActionMap("Cursor", throwIfNotFound: true);
+        m_Cursor_Pressing = m_Cursor.FindAction("Pressing", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -255,9 +286,59 @@ public partial class @InputActionControls: IInputActionCollection2, IDisposable
         }
     }
     public CameraActions @Camera => new CameraActions(this);
+
+    // Cursor
+    private readonly InputActionMap m_Cursor;
+    private List<ICursorActions> m_CursorActionsCallbackInterfaces = new List<ICursorActions>();
+    private readonly InputAction m_Cursor_Pressing;
+    public struct CursorActions
+    {
+        private @InputActionControls m_Wrapper;
+        public CursorActions(@InputActionControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Pressing => m_Wrapper.m_Cursor_Pressing;
+        public InputActionMap Get() { return m_Wrapper.m_Cursor; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CursorActions set) { return set.Get(); }
+        public void AddCallbacks(ICursorActions instance)
+        {
+            if (instance == null || m_Wrapper.m_CursorActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CursorActionsCallbackInterfaces.Add(instance);
+            @Pressing.started += instance.OnPressing;
+            @Pressing.performed += instance.OnPressing;
+            @Pressing.canceled += instance.OnPressing;
+        }
+
+        private void UnregisterCallbacks(ICursorActions instance)
+        {
+            @Pressing.started -= instance.OnPressing;
+            @Pressing.performed -= instance.OnPressing;
+            @Pressing.canceled -= instance.OnPressing;
+        }
+
+        public void RemoveCallbacks(ICursorActions instance)
+        {
+            if (m_Wrapper.m_CursorActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ICursorActions instance)
+        {
+            foreach (var item in m_Wrapper.m_CursorActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_CursorActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public CursorActions @Cursor => new CursorActions(this);
     public interface ICameraActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnZoom(InputAction.CallbackContext context);
+    }
+    public interface ICursorActions
+    {
+        void OnPressing(InputAction.CallbackContext context);
     }
 }
