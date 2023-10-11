@@ -8,12 +8,15 @@ public class CameraMoveSystem : MonoBehaviour
     [SerializeField] private float _zLimit;
 
     [SerializeField] private float _zoomSpeed = 2.0f;
-    [SerializeField] public float _minZoomDistance;
-    [SerializeField] public float _maxZoomDistance;
+    [SerializeField] private float _minZoom;
+    [SerializeField] private float _maxZoom;
 
     private InputActionControls _input;
     private Vector2 XBoundaries;
     private Vector2 ZBoundaries;
+
+    private float _minZoomDistance;
+    private float _maxZoomDistance;
 
     private float currentZoomDistance;
 
@@ -24,6 +27,9 @@ public class CameraMoveSystem : MonoBehaviour
 
         XBoundaries = new Vector2(transform.position.x - _xLimit, transform.position.x + _xLimit);
         ZBoundaries = new Vector2(transform.position.z - _zLimit, transform.position.z + _zLimit);
+
+        _minZoomDistance = transform.position.y - _minZoom;
+        _maxZoomDistance = transform.position.y + _maxZoom;
         currentZoomDistance = transform.position.y;
     }
 
