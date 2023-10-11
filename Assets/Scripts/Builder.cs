@@ -1,34 +1,36 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Builder : MonoBehaviour
 {
-    [SerializeField] private Tower _prefab;
+    [SerializeField] private Tower _tower;
     [SerializeField] private TowerPool _pool;
 
-    private Platform _platform;
+
+    public event UnityAction TowerIsBuilt;
 
     private void OnEnable()
     {
-        Platform.OnPlatformReady += SetPlatform;
+        Platform.OnPlatformReady += TryBuildTowerOnPlatform;
     }
 
     private void OnDisable()
     {
-        Platform.OnPlatformReady -= SetPlatform;
+        Platform.OnPlatformReady -= TryBuildTowerOnPlatform;
     }
 
-    private void Update()
+    private void TryBuildTowerOnPlatform(Platform platform)
     {
-        if (_platform != null && _prefab != null)
+        if (_tower != null)
         {
-            var obj = _pool.GetPrefab(_prefab);
-            _platform.SetTower(obj);
-            _platform = null;
+            var obj = _pool.GetPrefab(_tower);
+            platform.SetTower(obj);
+            TowerIsBuilt?.Invoke();
         }
     }
 
-    private void SetPlatform(Platform platform)
+    public void SetTower(Tower tower)
     {
-        _platform = platform;
+        _tower = tower;
     }
 }

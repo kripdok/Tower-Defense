@@ -591,9 +591,14 @@ GameObject:
   m_Component:
   - component: {fileID: 6388753471839313221}
   - component: {fileID: 3214431088239762682}
-  - component: {fileID: -1036137112535356549}
+  - component: {fileID: 1070164108264301523}
+  - component: {fileID: -3281962567196051979}
+  - component: {fileID: -1380742528443368604}
+  - component: {fileID: -8645191242152907313}
+  - component: {fileID: -6138604456217754422}
+  - component: {fileID: -5383856092185137120}
   m_Layer: 6
-  m_Name: ArcheryTowerLevel2
+  m_Name: ArcheryTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -634,7 +639,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.6, y: 1, z: 0.6}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-1036137112535356549
+--- !u!114 &1070164108264301523
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -643,7 +648,85 @@ MonoBehaviour:
   m_GameObject: {fileID: 8768476512536665283}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5000379392611af43ac9e3a4c6f5c913, type: 3}
+  m_Script: {fileID: 11500000, guid: a3cbcde0d26e66c46b2b7308f11dfa2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: {fileID: 0}
+  _name: ArcherTower
+  _price: 200
+  _icon: {fileID: 21300000, guid: ca7119ffab177454eb0710dae14d8815, type: 3}
+  _stateMachine: {fileID: -3281962567196051979}
+  _health: {fileID: -6138604456217754422}
+--- !u!114 &-3281962567196051979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8768476512536665283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c807651fe6deda47b4d73548a6fca2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackSystem: {fileID: -8645191242152907313}
+--- !u!114 &-1380742528443368604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8768476512536665283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50fafa7811c2590448d7c0db9a082c31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _radius: 2
+  _angleOfView: 360
+  _targetMask:
+    serializedVersion: 2
+    m_Bits: 128
+  _obstructionMask:
+    serializedVersion: 2
+    m_Bits: 0
+  _towerStateMachine: {fileID: -3281962567196051979}
+--- !u!114 &-8645191242152907313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8768476512536665283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f7ab47bf49fb514c8cf05be79d538fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animation: {fileID: -5383856092185137120}
+  _delayBetweenAttack: 2
+  _damage: 2
+--- !u!114 &-6138604456217754422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8768476512536665283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c93381952994a146af67632ff3f3441, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 10
+--- !u!114 &-5383856092185137120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8768476512536665283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba0ba7ebc9c53cf49abfd506b6a8e40c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
