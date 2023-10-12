@@ -6,7 +6,7 @@ public abstract class ObjectPool<T> : MonoBehaviour where T : MonoBehaviour
 {
     protected List<T> Objects;
 
-    private void Start()
+    private void Awake()
     {
         Objects = new List<T>();
     }
