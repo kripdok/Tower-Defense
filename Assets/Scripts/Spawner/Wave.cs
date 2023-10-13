@@ -64,7 +64,6 @@ public class Wave : MonoBehaviour
     private void ChangeCorrectUnitCount()
     {
         _correctUnitCount--;
-        Debug.Log(_correctUnitCount);
 
         if (_correctUnitCount<= 0)
         {

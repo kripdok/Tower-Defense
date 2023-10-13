@@ -25,7 +25,6 @@ public abstract class FieldOfView : MonoBehaviour
     private void FindingTheTarget()
     {
         Collider[] rangeChecks = Physics.OverlapSphere(transform.position, _radius, _targetMask);
-        
 
         if (_target == null)
         {

@@ -654,9 +654,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e217d603e5de4648b9c62c602661cc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _points: 10
+  _points: 30
   _attackSystem: {fileID: 9051916623867372559}
-  _speed: 0.5
+  _speed: 5
 --- !u!114 &24294874574124541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -686,7 +686,7 @@ MonoBehaviour:
   _angleOfView: 360
   _targetMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 512
   _obstructionMask:
     serializedVersion: 2
     m_Bits: 183
@@ -705,7 +705,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animation: {fileID: 2860336737165530561}
-  _delayBetweenAttack: 5
+  _delayBetweenAttack: 30
   _damage: 2
 --- !u!114 &6164469248457319834
 MonoBehaviour:
