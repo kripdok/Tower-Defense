@@ -13,7 +13,7 @@ public abstract class ObjectPool<T> : MonoBehaviour where T : MonoBehaviour
 
     public T GetPrefab(T prefab)
     {
-        var obj = Objects.FirstOrDefault(obj => obj.isActiveAndEnabled == false && obj == prefab) ;
+        var obj = Objects.FirstOrDefault(obj => obj.isActiveAndEnabled == false && obj is T);
 
         if(obj == null)
         {
@@ -24,7 +24,7 @@ public abstract class ObjectPool<T> : MonoBehaviour where T : MonoBehaviour
         return obj;
     }
 
-    public virtual void Release(T obj)
+    protected virtual void Release(T obj)
     {
         obj.gameObject.SetActive(false);
     }

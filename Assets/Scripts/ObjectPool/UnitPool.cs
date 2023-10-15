@@ -1,16 +1,22 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 public class UnitPool : ObjectPool<Unit>
 {
     [SerializeField] private UnitFactory _factory;
 
-    public event UnityAction UnitDead;
+    private void OnEnable()
+    {
+        EventBus.Instance.ReleasedUnit += Release;
+    }
 
-    public override void Release(Unit unit)
+    private void OnDisable()
+    {
+        EventBus.Instance.ReleasedUnit -= Release;
+    }
+
+    protected override void Release(Unit unit)
     {
         base.Release(unit);
-        UnitDead?.Invoke();
         unit.TryGetComponent<HealthSystem>(out HealthSystem _health);
         _health.AddMaxHealth();
     }

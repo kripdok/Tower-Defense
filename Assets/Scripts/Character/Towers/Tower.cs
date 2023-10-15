@@ -12,7 +12,6 @@ public class Tower : MonoBehaviour
     
     private StateMachine _stateMachine;
     private HealthSystem _health;   
-    private TowerPool _pool;
 
     public bool IsUpgraded { get; private set; }
 
@@ -32,16 +31,12 @@ public class Tower : MonoBehaviour
 
     private void OnEnable()
     {
-        _health.Died += BecomingInactive;
+        _health.HealthEnded += BecomingInactive;
     }
 
     private void OnDisable()
     {
-        _health.Died += BecomingInactive;
-    }
-    public void Init(TowerPool pool)
-    {
-        _pool = pool;
+        _health.HealthEnded -= BecomingInactive;
     }
 
     public void Upgrade()
@@ -56,7 +51,7 @@ public class Tower : MonoBehaviour
     {
         _stateMachine.ExitAllStates();
         IsUpgraded = false;
-        _pool.Release(this);
+        EventBus.Instance.ReleasedTower?.Invoke(this);
         Died?.Invoke();
     }
 }

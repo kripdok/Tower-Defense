@@ -16,9 +16,6 @@ public class TowerMenu : MonoBehaviour
 
     private Tower _tower;
 
-    public event UnityAction<int> Sold;
-    public event UnityAction<int> Upgraded;
-
     private void Awake()
     {
         CloseMenu();
@@ -73,14 +70,14 @@ public class TowerMenu : MonoBehaviour
 
     private void Upgrade()
     {
-        Upgraded?.Invoke(_tower.UpgradePrice);
+        EventBus.Instance.RemovePoint.Invoke(_tower.UpgradePrice);
         _upgrade.interactable = false;
         _tower.Upgrade();
     }
 
     private void Sell()
     {
-        Sold?.Invoke(_sellPriñe);
+        EventBus.Instance.AddPoint.Invoke(_sellPriñe);
         _tower.TryGetComponent<HealthSystem>(out HealthSystem healthSystem);
         healthSystem.CauseDamage(1000);
         _tower = null;

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Shop : MonoBehaviour
 {
@@ -9,8 +8,6 @@ public class Shop : MonoBehaviour
     [SerializeField] private Builder _builder;
 
     private TowerIcon _selectedIcon;
-
-    public event UnityAction<int> Bought;
 
     private void Start()
     {
@@ -26,6 +23,7 @@ public class Shop : MonoBehaviour
     private void OnDisable()
     {
         _counter.PointsHasChanged -= ChangeButtonInteraction;
+        _builder.TowerIsBuilt -= SellTower;
     }
 
     private void ChangeButtonInteraction()
@@ -51,7 +49,7 @@ public class Shop : MonoBehaviour
 
     private void SellTower()
     {
-        Bought?.Invoke(_selectedIcon.Price);
+        EventBus.Instance.RemovePoint?.Invoke(_selectedIcon.Price);
         CheckSelectIconForSaleability();
     }
 

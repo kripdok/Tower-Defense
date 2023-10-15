@@ -20,7 +20,6 @@ public class FieldOfViewUnit : FieldOfView
 
     protected override void SeeTheTarget(Transform target)
     {
-        Debug.Log(target);
         _target = target;
         _rotateSystem.Rotation(_target);
         _UnitStateMachine.AttackState.SetTarget(_target);

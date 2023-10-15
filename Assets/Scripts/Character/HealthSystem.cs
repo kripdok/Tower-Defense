@@ -6,9 +6,9 @@ public class HealthSystem : MonoBehaviour
     [SerializeField] private int _health;
     protected int _correctHealth;
 
-    public event UnityAction Died;
-
     public int CorrectHealth => _correctHealth;
+
+    public UnityAction HealthEnded;
 
     private void Awake()
     {
@@ -22,7 +22,7 @@ public class HealthSystem : MonoBehaviour
         if (_correctHealth <= 0)
         {
             _correctHealth = 0;
-            Died?.Invoke();
+            HealthEnded?.Invoke();
         }
     }
 

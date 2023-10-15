@@ -702,8 +702,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animation: {fileID: -5383856092185137120}
-  _delayBetweenAttack: 2
-  _damage: 2
+  _delayBetweenAttack: 1
+  _damage: 1
 --- !u!114 &-6138604456217754422
 MonoBehaviour:
   m_ObjectHideFlags: 0

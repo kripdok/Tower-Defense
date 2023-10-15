@@ -24,12 +24,12 @@ public class Wave : MonoBehaviour
 
     private void OnEnable()
     {
-        _unitPool.UnitDead += ChangeCorrectUnitCount;
+        EventBus.Instance.UnitDied += ChangeCorrectUnitCount;
     }
 
     private void OnDisable()
     {
-        _unitPool.UnitDead -= ChangeCorrectUnitCount;
+        EventBus.Instance.UnitDied -= ChangeCorrectUnitCount;
     }
 
     private void StartNextWawe()

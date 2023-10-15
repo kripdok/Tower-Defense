@@ -12,15 +12,15 @@ public class Castle : MonoBehaviour
 
     private void OnEnable()
     {
-        _health.Died += Die;
+        _health.HealthEnded += BecomingInactive;
     }
 
     private void OnDisable()
     {
-        _health.Died -= Die;
+        _health.HealthEnded -= BecomingInactive;
     }
 
-    private void Die()
+    private void BecomingInactive()
     {
         gameObject.SetActive(false);
     }
