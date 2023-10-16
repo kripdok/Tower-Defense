@@ -11,9 +11,6 @@ public class Spawner : MonoBehaviour
     private WaitForSeconds _time;
     private Coroutine _coroutine;
 
-    private int x;
-    private List<SpawnPoint> y;
-
     private void Awake()
     {
         _time = new WaitForSeconds(_delayBetweenSpawn);
@@ -29,25 +26,6 @@ public class Spawner : MonoBehaviour
         _coroutine = StartCoroutine(Spawning(unitCount, spawnPoints));
 
     }
-
-    private void test(int unitCount, List<SpawnPoint> spawnPoints)
-    {
-        Unit prefab = SelectPrefab();
-        var unit = _pool.GetPrefab(prefab);
-        var spawn = SelectSpawnPoint(spawnPoints);
-        spawn.Spawning(_pool, unit);
-    }
-
-
-    //private void Update()
-    //{
-    //    if (x != 0 && y != null)
-    //    {
-    //        StartCoroutine(Spawning(x, y));
-    //        x = 0;
-    //        y = null;
-    //    }
-    //}
 
     private IEnumerator Spawning(int unitCount, List<SpawnPoint> spawnPoints)
     {

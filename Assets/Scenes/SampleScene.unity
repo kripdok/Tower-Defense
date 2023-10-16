@@ -8497,8 +8497,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pointCounterUI: {fileID: 4513841}
-  _shop: {fileID: 1629091789}
-  _towerMenu: {fileID: 1508921426}
 --- !u!4 &1023194049
 Transform:
   m_ObjectHideFlags: 0
@@ -12335,7 +12333,6 @@ MonoBehaviour:
   _pool: {fileID: 932532039}
   _units:
   - {fileID: -8045127118508397966, guid: 30c8a29081db0fa4194bef4a8458461c, type: 3}
-  - {fileID: 5385840053336459890, guid: 6ce6a669df8a96a4d8a67661462e13c8, type: 3}
   _delayBetweenSpawn: 2
 --- !u!114 &1687051091
 MonoBehaviour:

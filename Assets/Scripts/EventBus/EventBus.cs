@@ -26,4 +26,6 @@ public class EventBus
 
     public UnityAction<Unit> ReleasedUnit;
     public UnityAction<Tower> ReleasedTower;
+    public UnityAction<Bullet> ReleasedBullet;
+
 }

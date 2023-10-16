@@ -24,6 +24,8 @@ public class StateMachine : MonoBehaviour
         {
             state.Exit();
         }
+
+        SetStateWithTheMaxPriority();
     }
 
     public void SetStateWithTheMaxPriority()

@@ -4,7 +4,6 @@ public class AttackState : State
 {
     private AttackSystem _attackSystem;
     private Transform _target;
-    private HealthSystem _targetHealth;
 
     public AttackState(AttackSystem attackSystem,StateMachine stateMachine,int maxPriority = 3) : base(maxPriority, stateMachine)
     {
@@ -13,14 +12,14 @@ public class AttackState : State
 
     public override void Enter()
     {
-        _attackSystem.PrepareToStrike(_targetHealth);
+        _attackSystem.PrepareToStrike(_target);
     }
 
     public override void LogicUpdate()
     {
         if(_target == null)
         {
-            ConcretePriority = 0;
+            Exit();
             StateMachine.SetStateWithTheMaxPriority();
         }
     }
@@ -29,20 +28,21 @@ public class AttackState : State
 
     public override void Exit()
     {
-        _target = null;
         _attackSystem.TryFinishAttack();
+        ConcretePriority = 0;
+        _target = null;
     }
 
     public void SetTarget(Transform target)
     {
+        Debug.Log("SetTarget");
         _target = target;
-        _target.TryGetComponent<HealthSystem>(out _targetHealth);
         ConcretePriority = MaxPriority;
         StateMachine.SetStateWithTheMaxPriority();
     }
 
     public void ClearTarget()
     {
-        _target = null;
+        Exit();
     }
 }

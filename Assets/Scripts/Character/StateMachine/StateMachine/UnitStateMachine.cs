@@ -21,7 +21,6 @@ public class UnitStateMachine : StateMachine
         {
             _idleState, MoveState, AttackState
         };
-
         SetStateWithTheMaxPriority();
     }
 }
