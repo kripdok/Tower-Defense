@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MouseClickHandler : MonoBehaviour
 {
-    [SerializeField] private LayerMask clickLayerMask;
+    [SerializeField] private LayerMask _clickLayerMask;
     [SerializeField] private Builder _builder;
     [SerializeField] private TowerMenu _menu;
 
@@ -28,7 +28,7 @@ public class MouseClickHandler : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, clickLayerMask))
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _clickLayerMask))
         {
             GameObject clickedObject = hit.collider.gameObject;
             HandleClick(clickedObject);
@@ -41,10 +41,10 @@ public class MouseClickHandler : MonoBehaviour
         {
             _builder.TryBuildTowerOnPlatform(platform);
             _menu.CloseMenu();
-        }  
-        else if(clickedObject.TryGetComponent<Tower>(out Tower tower))
+        }
+        else if (clickedObject.TryGetComponent<TowerVault>(out TowerVault towerVault))
         {
-            _menu.SetTower(tower);
+            _menu.SetTower(towerVault);
         }
         else
         {

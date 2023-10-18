@@ -475,7 +475,7 @@ MonoBehaviour:
     m_Bits: 512
   _obstructionMask:
     serializedVersion: 2
-    m_Bits: 183
+    m_Bits: 167
   _unit: {fileID: 5385840053336459890}
   _UnitStateMachine: {fileID: 24294874574124541}
 --- !u!114 &6164469248457319834
@@ -516,7 +516,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animation: {fileID: 2860336737165530561}
-  _delayBetweenAttack: 0
   _weapon: {fileID: 1736695730593456668}
 --- !u!1 &8738039890974699755
 GameObject:

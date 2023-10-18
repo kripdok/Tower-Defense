@@ -3,24 +3,25 @@ using UnityEngine.Events;
 
 public class Builder : MonoBehaviour
 {
-    [SerializeField] private TowerPool _pool;
+    [SerializeField] private TowerVaultPool _pool;
 
-    private Tower _tower;
+    private TowerVault _towerVault;
 
-    public event UnityAction TowerIsBuilt;
+    public event UnityAction TowerVaultIsBuilt;
 
     public void TryBuildTowerOnPlatform(Platform platform)
     {
-        if (_tower != null)
+        if (_towerVault != null)
         {
-            var obj = _pool.GetPrefab(_tower);
+            var obj = _pool.GetPrefab(_towerVault);
             platform.SetTower(obj);
-            TowerIsBuilt?.Invoke();
+            TowerVaultIsBuilt?.Invoke();
+            _towerVault = null;
         }
     }
 
-    public void SetTower(Tower tower)
+    public void SetTower(TowerVault towerVault)
     {
-        _tower = tower;
+        _towerVault = towerVault;
     }
 }

@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class TowerFactory : AbstractFactory<Tower>
+public class TowerFactory : AbstractFactory<AbstractTower>
 {
-    public override Tower Create(Tower prefab)
+    public override AbstractTower Create(AbstractTower prefab)
     {
         return Instantiate(prefab, transform);
     }

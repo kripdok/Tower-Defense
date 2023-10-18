@@ -308,7 +308,7 @@ MonoBehaviour:
     m_Bits: 576
   _obstructionMask:
     serializedVersion: 2
-    m_Bits: 183
+    m_Bits: 167
   _unit: {fileID: -8045127118508397966}
   _UnitStateMachine: {fileID: 1582859320}
 --- !u!114 &1582859331

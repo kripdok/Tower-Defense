@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 [RequireComponent(typeof(Renderer))]
 public class Platform : MonoBehaviour
@@ -7,11 +6,11 @@ public class Platform : MonoBehaviour
     [SerializeField] private Color _hoverColor;
     [SerializeField] private Vector3 _positionOffset;
 
-    private Tower _tower;
+    private TowerVault _vaultTowers;
     private Renderer _renderer;
     private Color _defoltColor;
 
-    private void Start()
+    private void Awake()
     {
         _renderer = GetComponent<Renderer>();
         _defoltColor = _renderer.material.color;
@@ -19,9 +18,9 @@ public class Platform : MonoBehaviour
 
     private void OnDisable()
     {
-        if(_tower != null)
+        if(_vaultTowers != null)
         {
-            _tower.Died -= DeleteTower;
+            _vaultTowers.Died -= DeleteTowerVault;
         }
     }
 
@@ -35,17 +34,17 @@ public class Platform : MonoBehaviour
         _renderer.material.color = _defoltColor;
     }
 
-    public void SetTower(Tower Tower)
+    public void SetTower(TowerVault towerVault)
     {
-        _tower = Tower;
-        _tower.transform.position = transform.position + _positionOffset;
-        _tower.Died += DeleteTower;
+        _vaultTowers = towerVault;
+        _vaultTowers.transform.position = transform.position + _positionOffset;
+        _vaultTowers.BuildFirstTower();
+        _vaultTowers.Died += DeleteTowerVault;
     }
 
-
-    private void DeleteTower()
+    private void DeleteTowerVault()
     {
-        _tower.Died -= DeleteTower;
-        _tower = null;
+        _vaultTowers.Died -= DeleteTowerVault;
+        _vaultTowers = null;
     }
 }

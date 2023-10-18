@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class Shop : MonoBehaviour
 {
-    [SerializeField] private List<TowerIcon> _icons;
+    [SerializeField] private List<TowerVaultIcon> _icons;
     [SerializeField] private PointCounter _counter;
     [SerializeField] private Builder _builder;
 
-    private TowerIcon _selectedIcon;
+    private TowerVaultIcon _selectedIcon;
 
     private void Start()
     {
@@ -17,13 +17,13 @@ public class Shop : MonoBehaviour
     private void OnEnable()
     {
         _counter.PointsHasChanged += ChangeButtonInteraction;
-        _builder.TowerIsBuilt += SellTower;
+        _builder.TowerVaultIsBuilt += SellTower;
     }
 
     private void OnDisable()
     {
         _counter.PointsHasChanged -= ChangeButtonInteraction;
-        _builder.TowerIsBuilt -= SellTower;
+        _builder.TowerVaultIsBuilt -= SellTower;
     }
 
     private void ChangeButtonInteraction()
@@ -41,10 +41,10 @@ public class Shop : MonoBehaviour
         }
     }
 
-    public void PassTower(TowerIcon icon)
+    public void PassTower(TowerVaultIcon icon)
     {
         _selectedIcon = icon;
-        _builder.SetTower(icon.Tower);
+        _builder.SetTower(icon.VaultTower);
     }
 
     private void SellTower()

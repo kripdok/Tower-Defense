@@ -25,7 +25,8 @@ public class EventBus
     public UnityAction UnitDied;
 
     public UnityAction<Unit> ReleasedUnit;
-    public UnityAction<Tower> ReleasedTower;
+    public UnityAction<AbstractTower> ReleasedTower;
+    public UnityAction<TowerVault> ReleasedVaultTower;
     public UnityAction<Bullet> ReleasedBullet;
 
 }

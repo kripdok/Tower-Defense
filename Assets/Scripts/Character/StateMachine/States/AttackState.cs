@@ -34,8 +34,7 @@ public class AttackState : State
     }
 
     public void SetTarget(Transform target)
-    {
-        Debug.Log("SetTarget");
+    {  
         _target = target;
         ConcretePriority = MaxPriority;
         StateMachine.SetStateWithTheMaxPriority();

@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class TowerMenu : MonoBehaviour
@@ -14,7 +13,7 @@ public class TowerMenu : MonoBehaviour
     [SerializeField] private int _sellPriñe;
     [SerializeField] private Vector3 _positionOffset;
 
-    private Tower _tower;
+    private TowerVault _towerVault;
 
     private void Awake()
     {
@@ -35,14 +34,14 @@ public class TowerMenu : MonoBehaviour
         _sell.onClick.RemoveListener(Sell);
     }
 
-    public void SetTower(Tower tower)
+    public void SetTower(TowerVault towerVault)
     {
-        _tower = tower;
-        ActivateMenu(tower);
-        _upgradeText.text = $"Upgrade ${tower.UpgradePrice}";
-        tower.Died += CloseMenu;
+        _towerVault = towerVault;
+        ActivateMenu(towerVault);
+        _upgradeText.text = $"Upgrade ${towerVault.UpgradePrice}";
+        towerVault.Died += CloseMenu;
 
-        if(tower.IsUpgraded || _point.CorrectPoint < tower.UpgradePrice)
+        if (towerVault.IsUpgradeLimitReached || _point.CorrectPoint < towerVault.UpgradePrice)
         {
             _upgrade.interactable = false;
         }
@@ -56,31 +55,31 @@ public class TowerMenu : MonoBehaviour
     {
         gameObject.SetActive(false);
 
-        if(_tower != null)
+        if(_towerVault != null)
         {
-            _tower.Died -= CloseMenu;
+            _towerVault.Died -= CloseMenu;
         }
     }
 
-    private void ActivateMenu(Tower tower)
+    private void ActivateMenu(TowerVault towerVault)
     {
-        transform.position = tower.transform.position + _positionOffset;
+        transform.position = towerVault.transform.position + _positionOffset;
         gameObject.SetActive(true);
     }
 
     private void Upgrade()
     {
-        EventBus.Instance.RemovePoint.Invoke(_tower.UpgradePrice);
+        EventBus.Instance.RemovePoint.Invoke(_towerVault.UpgradePrice);
         _upgrade.interactable = false;
-        _tower.Upgrade();
+        _towerVault.Upgrade();
     }
 
     private void Sell()
     {
         EventBus.Instance.AddPoint.Invoke(_sellPriñe);
-        _tower.TryGetComponent<HealthSystem>(out HealthSystem healthSystem);
-        healthSystem.CauseDamage(1000);
-        _tower = null;
+        _towerVault.Sell();
+        _towerVault = null;
         _upgrade.interactable = false;
+        gameObject.SetActive(false);
     }
 }

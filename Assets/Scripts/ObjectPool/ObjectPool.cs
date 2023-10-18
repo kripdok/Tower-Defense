@@ -13,9 +13,9 @@ public abstract class ObjectPool<T> : MonoBehaviour where T : MonoBehaviour
 
     public T GetPrefab(T prefab)
     {
-        var obj = Objects.FirstOrDefault(obj => obj.isActiveAndEnabled == false && obj is T);
+        var obj = Objects.FirstOrDefault(obj => obj.isActiveAndEnabled == false && obj.GetType() == prefab.GetType());
 
-        if(obj == null)
+        if (obj == null)
         {
             obj = CreatePrefab(prefab);
         }

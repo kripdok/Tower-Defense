@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TowerPool : ObjectPool<Tower>
+public class TowerPool : ObjectPool<AbstractTower>
 {
     [SerializeField] private TowerFactory _factory;
 
@@ -14,14 +14,14 @@ public class TowerPool : ObjectPool<Tower>
         EventBus.Instance.ReleasedTower -= Release;
     }
 
-    protected override void Release(Tower tower)
+    protected override void Release(AbstractTower tower)
     {
         base.Release(tower);
         tower.TryGetComponent<HealthSystem>(out HealthSystem _health);
         _health.AddMaxHealth();
     }
 
-    protected override Tower CreatePrefab(Tower prefab)
+    protected override AbstractTower CreatePrefab(AbstractTower prefab)
     {
         var obj = _factory.Create(prefab);
         Objects.Add(obj);
