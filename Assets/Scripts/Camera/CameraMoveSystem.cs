@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class CameraMoveSystem : MonoBehaviour
 {
@@ -37,6 +36,7 @@ public class CameraMoveSystem : MonoBehaviour
     {
         Vector2 direction = _input.Camera.Move.ReadValue<Vector2>();
         float zoom = _input.Camera.Zoom.ReadValue<float>();
+
         Move(direction);
         Zoom(zoom);
     }
@@ -45,9 +45,14 @@ public class CameraMoveSystem : MonoBehaviour
     {
         Vector3 moveDirection = new Vector3(direction.x, 0, direction.y);
         Vector3 newPosition = transform.position + moveDirection * _moveSpeed * Time.deltaTime;
-        float clampedX = Mathf.Clamp(newPosition.x, XBoundaries.x, XBoundaries.y);
-        float clampedZ = Mathf.Clamp(newPosition.z, ZBoundaries.x, ZBoundaries.y);
+        float clampedX = SetClamp(newPosition.x, XBoundaries);
+        float clampedZ = SetClamp(newPosition.z, ZBoundaries);
         transform.position = new Vector3(clampedX, transform.position.y, clampedZ);
+    }
+
+    private float SetClamp(float position,Vector2 Boundaries)
+    {
+        return Mathf.Clamp(position, Boundaries.x, Boundaries.y);
     }
 
     private void Zoom(float zoom)

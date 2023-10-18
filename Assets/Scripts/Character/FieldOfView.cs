@@ -68,5 +68,4 @@ public abstract class FieldOfView : MonoBehaviour
     protected abstract void ClearTarget();
 
     protected abstract void SeeTheTarget(Transform target);
-    
 }

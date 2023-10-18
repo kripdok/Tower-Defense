@@ -44,7 +44,6 @@ public class Wave : MonoBehaviour
 
         var spawns = ReturtnEnableSpawns();
         _spawner.StartWave(_unitCount, spawns);
-
     }
 
     private List<SpawnPoint> ReturtnEnableSpawns()
