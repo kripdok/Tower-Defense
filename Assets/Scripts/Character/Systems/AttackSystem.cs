@@ -3,8 +3,6 @@ using UnityEngine;
 
 public abstract class AttackSystem : MonoBehaviour
 {
-    [SerializeField] private HashUnitAnimation _animation;
-
     private Coroutine _coroutine;
 
     public void PrepareToStrike(Transform target)

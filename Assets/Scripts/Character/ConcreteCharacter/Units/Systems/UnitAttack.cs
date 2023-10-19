@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class UnitAttack : AttackSystem
 {
+    [SerializeField] private HashUnitAnimation _animation;
     [SerializeField] private Weapon _weapon;
 
     protected override IEnumerator Attack(Transform target)
