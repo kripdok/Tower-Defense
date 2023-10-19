@@ -348,7 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01eb197ce0b2ee2459abc08535b04af6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animation: {fileID: 1582859318}
+  _hashAnimation: {fileID: 1582859318}
   _weapon: {fileID: 7042295649889000939}
 --- !u!1 &3761084869234761319
 GameObject:

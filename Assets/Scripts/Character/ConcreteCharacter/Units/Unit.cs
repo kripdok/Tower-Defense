@@ -4,28 +4,37 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(HealthSystem))]
 [RequireComponent(typeof(UnitStateMachine))]
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(HashUnitAnimation))]
+[RequireComponent(typeof(UnitAttack))]
 public class Unit : MonoBehaviour
 {
     [SerializeField] private int _points;
-    [SerializeField] private AttackSystem _attackSystem;
     [SerializeField] private float _speed;
 
-    private Route _route;
+    private HashUnitAnimation _hashUnitAnimation;
     private UnitStateMachine _unitStateMachine;
+    private AttackSystem _attackSystem;
     private HealthSystem _health;
+    private Animator _animator;
+    private Route _route;
 
-    public MoveSystem MoveSystem { get; private set; }
     public RotateSystem RotateSystem { get; private set; }
+    public MoveSystem MoveSystem { get; private set; }
 
     public AttackSystem AttackSystem => _attackSystem;
 
     private void Awake()
     {
-        _health= GetComponent<HealthSystem>();
+        _hashUnitAnimation = GetComponent<HashUnitAnimation>();
         _unitStateMachine = GetComponent<UnitStateMachine>();
+        _attackSystem = GetComponent<UnitAttack>();
+        _health= GetComponent<HealthSystem>();
+        _animator = GetComponent<Animator>();
+
         _route = new Route(_unitStateMachine);
         RotateSystem = new RotateSystem(transform);
-        MoveSystem = new MoveSystem(transform, _speed, GetComponent<Rigidbody>(), RotateSystem);
+        MoveSystem = new MoveSystem(transform, _speed, GetComponent<Rigidbody>(), RotateSystem,_animator,_hashUnitAnimation);
     }
 
     private void OnEnable()
